@@ -1,5 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import "./cadastrar.css";
+import { Link } from "react-router-dom";
 
 function Cadastrar() {
   return (
@@ -105,6 +106,17 @@ function Cadastrar() {
               {" "}
               Cadastrar
             </Button>
+          </div>
+          <div className="listCd">
+            <p>
+              Já possui uma conta?{" "}
+              <span>
+                <Link to={"/login"} className="link">
+                  {" "}
+                  Clique aqui!
+                </Link>
+              </span>
+            </p>
           </div>
         </form>
       </div>
