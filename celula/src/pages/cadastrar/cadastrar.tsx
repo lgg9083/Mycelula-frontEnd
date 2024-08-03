@@ -111,7 +111,7 @@ function Cadastrar() {
             <p>
               Já possui uma conta?{" "}
               <span>
-                <Link to={"/login"} className="link">
+                <Link to={"/"} className="link">
                   {" "}
                   Clique aqui!
                 </Link>
