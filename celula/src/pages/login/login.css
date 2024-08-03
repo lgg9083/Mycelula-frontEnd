@@ -31,6 +31,16 @@ body {
   flex-direction: column;
   gap: 15px;
 }
+.semConta {
+  padding: 10px;
+  font-size: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.link {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+}
 .login img {
   width: 150px;
   height: 100px;
