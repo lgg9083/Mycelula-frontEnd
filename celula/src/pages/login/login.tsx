@@ -86,10 +86,13 @@ function Login() {
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Login
             </Button>
-            <p className="semConta"> 
+            <p className="semConta">
               Não tem uma conta ?{" "}
               <span>
-                <Link to={""} className="link"> clique aqui!</Link>
+                <Link to={"/cadastrar"} className="link">
+                  {" "}
+                  clique aqui!
+                </Link>
               </span>
             </p>
           </form>
