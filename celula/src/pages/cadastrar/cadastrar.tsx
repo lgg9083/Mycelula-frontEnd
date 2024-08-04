@@ -152,7 +152,8 @@ function Cadastrar() {
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              // value={formik.values.senha}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email ? formik.errors.email || "" : ""}
             ></TextField>
             <TextField
               label="Senha"
