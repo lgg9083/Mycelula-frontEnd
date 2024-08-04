@@ -8,7 +8,7 @@ import validationSchema from "./validationSchema";
 import { LoginCount } from "../../services/routes";
 import { useMutation } from "@tanstack/react-query";
 import { useLogin } from "../../hooks/useLogin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import { error } from "console";
 function Login() {
@@ -32,7 +32,7 @@ function Login() {
   } = useLogin();
   useEffect(() => {
     if (token) {
-      console.log('aqui')
+      console.log("aqui");
       navigate(0);
     }
   }, [token]);
@@ -81,15 +81,20 @@ function Login() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.senha && Boolean(formik.errors.senha)}
-              helperText={
-                formik.touched.senha
-                  ? formik.errors.senha || ''
-                  : ""
-              }
+              helperText={formik.touched.senha ? formik.errors.senha || "" : ""}
             />
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Login
             </Button>
+            <p className="semConta">
+              Não tem uma conta ?{" "}
+              <span>
+                <Link to={"/cadastrar"} className="link">
+                  {" "}
+                  clique aqui!
+                </Link>
+              </span>
+            </p>
           </form>
         </div>
       </div>
