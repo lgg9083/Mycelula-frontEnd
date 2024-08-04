@@ -59,6 +59,8 @@ function Cadastrar() {
               value={formik.values.endereco}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              error={formik.touched.endereco && Boolean(formik.errors.endereco)}
+              helperText={formik.touched.endereco ? formik.errors.endereco || "" : ""}
             ></TextField>
           </div>
           <div className="listCd">
@@ -72,8 +74,8 @@ function Cadastrar() {
               value={formik.values.bairro}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              // value={formik.values.senha}
-            ></TextField>
+              error={formik.touched.bairro && Boolean(formik.errors.bairro)}
+              helperText={formik.touched.bairro ? formik.errors.bairro || "" : ""}            ></TextField>
             <TextField
               label="Data do Batismo"
               name="data_Batismo"
