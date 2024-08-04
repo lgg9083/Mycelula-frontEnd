@@ -101,8 +101,8 @@ function Cadastrar() {
               value={formik.values.data_de_nascimento}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              // value={formik.values.senha}
-            ></TextField>
+              error={formik.touched.data_de_nascimento && Boolean(formik.errors.data_de_nascimento)}
+              helperText={formik.touched.data_de_nascimento ? formik.errors.data_de_nascimento || "" : ""}            ></TextField>
             <TextField
               label="Telefone"
               name="telefone"
