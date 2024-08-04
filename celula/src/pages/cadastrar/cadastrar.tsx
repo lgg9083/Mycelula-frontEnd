@@ -113,7 +113,8 @@ function Cadastrar() {
               value={formik.values.telefone}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              // value={formik.values.senha}
+              error={formik.touched.telefone && Boolean(formik.errors.telefone)}
+              helperText={formik.touched.telefone ? formik.errors.telefone || "" : ""}
             ></TextField>
           </div>
           <div className="listCd">
