@@ -128,7 +128,8 @@ function Cadastrar() {
               value={formik.values.cidade}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              // value={formik.values.senha}
+              error={formik.touched.cidade && Boolean(formik.errors.cidade)}
+              helperText={formik.touched.cidade ? formik.errors.cidade || "" : ""}
             ></TextField>
             <TextField
               label="Celula"
