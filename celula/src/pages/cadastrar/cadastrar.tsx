@@ -46,8 +46,8 @@ function Cadastrar() {
               value={formik.values.nome}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              // error={formik.touched.senha && Boolean(formik.errors.senha)}
-              // helperText={formik.touched.senha ? formik.errors.senha || "" : ""}
+              error={formik.touched.nome && Boolean(formik.errors.nome)}
+              helperText={formik.touched.nome ? formik.errors.nome || "" : ""}
             ></TextField>
             <TextField
               label="Endereco"
