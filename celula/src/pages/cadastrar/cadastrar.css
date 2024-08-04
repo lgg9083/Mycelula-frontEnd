@@ -19,12 +19,12 @@ body {
 .cadastrar {
   background-color: #757575;
   width: 1200px;
-  height: 600px;
+  height: max-content;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 10px 10px 10px ;
+  padding: 20px 10px 10px 10px ;
 
 }
 .listCd {
@@ -37,7 +37,30 @@ body {
 }
 .cadastrar input {
     width: 300px;
+    color: azure;
+    border-color: azure;
 }
+.custom-textfield .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: white; /* Cor da borda */
+  }
+  
+  .custom-textfield .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: white; /* Cor da borda ao passar o mouse */
+  }
+  
+  .custom-textfield .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: white; /* Cor da borda ao focar */
+  }
+  
+  .custom-textfield .MuiInputLabel-root {
+    color: white; /* Cor do label */
+  }
+  
+  .custom-textfield .MuiInputLabel-root.Mui-focused {
+    color: white; /* Cor do label ao focar */
+  }
+  
+
 .cadastrar Button {
     background-color: #fb0101;
     color: black;

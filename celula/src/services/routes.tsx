@@ -14,3 +14,7 @@ export const LoginCount = async (dados: ILogin): Promise<any> => {
 
   return response;
 };
+export const BuscarCelulas = async ():Promise<any> => {
+  const response = await axiosInstance.get('/celula')
+  return response
+}
