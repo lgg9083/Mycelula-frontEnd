@@ -1,10 +1,19 @@
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import "./cadastrar.css";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik"; // Certifique-se de importar o useFormik
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { BuscarCelulas } from "../../services/routes";
+import validationSchema from "./validationSchema";
 
 function Cadastrar() {
   const [dados, setDados] = useState<any[]>([]);
@@ -30,6 +39,7 @@ function Cadastrar() {
       senha: "",
       celula: "",
     },
+    validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
     },
@@ -42,7 +52,7 @@ function Cadastrar() {
           <div className="listCd">
             <TextField
               label="Nome"
-              name="Nome"
+              name="nome"
               type="text"
               variant="outlined"
               margin="normal"
@@ -51,11 +61,11 @@ function Cadastrar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.nome && Boolean(formik.errors.nome)}
-              helperText={formik.touched.nome ? formik.errors.nome || "" : ""}
+              helperText={formik.touched.nome && formik.errors.nome}
             ></TextField>
             <TextField
               label="Endereco"
-              name="Endereco"
+              name="endereco"
               type="text"
               variant="outlined"
               margin="normal"
@@ -72,7 +82,7 @@ function Cadastrar() {
           <div className="listCd">
             <TextField
               label="Bairro"
-              name="Bairro"
+              name="bairro"
               type="text"
               variant="outlined"
               margin="normal"
@@ -87,7 +97,7 @@ function Cadastrar() {
             ></TextField>
             <TextField
               label="Data do Batismo"
-              name="Data do Batismo"
+              name="data_Batismo"
               type="text"
               variant="outlined"
               margin="normal"
@@ -109,7 +119,7 @@ function Cadastrar() {
           <div className="listCd">
             <TextField
               label="Data de Nascimento"
-              name="Data de Nascimento"
+              name="data_de_nascimento"
               type="text"
               variant="outlined"
               margin="normal"
@@ -129,7 +139,7 @@ function Cadastrar() {
             ></TextField>
             <TextField
               label="Telefone"
-              name="Telefone"
+              name="telefone"
               type="text"
               variant="outlined"
               margin="normal"
@@ -146,7 +156,7 @@ function Cadastrar() {
           <div className="listCd">
             <TextField
               label="Cidade"
-              name="Cidade"
+              name="cidade"
               type="text"
               variant="outlined"
               margin="normal"
@@ -164,8 +174,8 @@ function Cadastrar() {
               margin="normal"
               className="custom-textfield"
               error={formik.touched.celula && Boolean(formik.errors.celula)}
-              sx={ {
-                width: '330px'
+              sx={{
+                width: "330px",
               }}
             >
               <InputLabel>Celula</InputLabel>
@@ -175,11 +185,15 @@ function Cadastrar() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 renderValue={(selected: any): React.ReactNode => {
-                  const selectedItem = dados.find((item:any) => item.id === selected);
-                  return selectedItem ? selectedItem.nome : "Selecione uma Celula";
+                  const selectedItem = dados.find(
+                    (item: any) => item.id === selected
+                  );
+                  return selectedItem
+                    ? selectedItem.nome
+                    : "Selecione uma Celula";
                 }}
               >
-                {dados.map((item:any) => (
+                {dados.map((item: any) => (
                   <MenuItem key={item.id} value={item.id}>
                     {item.nome}
                   </MenuItem>
@@ -196,7 +210,7 @@ function Cadastrar() {
           <div className="listCd">
             <TextField
               label="Email"
-              name="Email"
+              name="email"
               type="email"
               variant="outlined"
               margin="normal"
@@ -209,7 +223,7 @@ function Cadastrar() {
             ></TextField>
             <TextField
               label="Senha"
-              name="Senha"
+              name="senha"
               type="password"
               variant="outlined"
               margin="normal"
