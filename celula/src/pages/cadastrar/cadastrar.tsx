@@ -1,9 +1,22 @@
-import { Button, TextField } from "@mui/material";
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import "./cadastrar.css";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik"; // Certifique-se de importar o useFormik
+import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import { BuscarCelulas } from "../../services/routes";
 
 function Cadastrar() {
+  const [dados, setDados] = useState<any[]>([]);
+  const { data, isError, isLoading, isSuccess } = useQuery({
+    queryKey: ["celulas"],
+    queryFn: () => BuscarCelulas(),
+  });
+  useEffect(() => {
+    if (data) {
+      setDados(data.data);
+    }
+  }, [data]);
   const formik = useFormik({
     initialValues: {
       nome: "",
@@ -15,6 +28,7 @@ function Cadastrar() {
       cidade: "",
       email: "",
       senha: "",
+      celula: "",
     },
     onSubmit: (values) => {
       console.log(values);
@@ -145,19 +159,39 @@ function Cadastrar() {
                 formik.touched.cidade ? formik.errors.cidade || "" : ""
               }
             ></TextField>
-            <TextField
-              label="Celula"
-              name="celula"
-              type="text"
-              variant="outlined"
+            <FormControl
+              variant="filled"
               margin="normal"
               className="custom-textfield"
-              // value={formik.values}
-              // onChange={formik.handleChange}
-              // onBlur={formik.handleBlur}
-              // error={formik.touched.celula && Boolean(formik.errors.celula)}
-              // helperText={formik.touched.celula ? formik.errors.celula || "" : ""}
-            ></TextField>
+              error={formik.touched.celula && Boolean(formik.errors.celula)}
+              sx={ {
+                width: '330px'
+              }}
+            >
+              <InputLabel>Celula</InputLabel>
+              <Select
+                name="celula"
+                value={formik.values.celula}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                renderValue={(selected: any): React.ReactNode => {
+                  const selectedItem = dados.find((item:any) => item.id === selected);
+                  return selectedItem ? selectedItem.nome : "Selecione uma Celula";
+                }}
+              >
+                {dados.map((item:any) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.nome}
+                  </MenuItem>
+                ))}
+                <MenuItem value="">
+                  <em>Selecione uma Celula</em>
+                </MenuItem>
+              </Select>
+              {formik.touched.celula && formik.errors.celula && (
+                <FormHelperText>{formik.errors.celula}</FormHelperText>
+              )}
+            </FormControl>
           </div>
           <div className="listCd">
             <TextField
