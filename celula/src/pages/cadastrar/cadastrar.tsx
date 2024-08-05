@@ -32,7 +32,7 @@ function Cadastrar() {
       endereco: "",
       bairro: "",
       data_Batismo: "",
-      data_de_nascimento: "",
+      data_de_Nascimento: "",
       telefone: "",
       cidade: "",
       email: "",
@@ -95,13 +95,16 @@ function Cadastrar() {
                 formik.touched.bairro ? formik.errors.bairro || "" : ""
               }
             ></TextField>
-            <TextField
-              label="Data do Batismo"
+           <TextField
+              label="Data deBatismo"
               name="data_Batismo"
-              type="text"
+              type="date"
               variant="outlined"
               margin="normal"
               className="custom-textfield"
+              InputLabelProps={{
+                shrink: true,
+              }}
               value={formik.values.data_Batismo}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -114,29 +117,33 @@ function Cadastrar() {
                   ? formik.errors.data_Batismo || ""
                   : ""
               }
-            ></TextField>
+            />
           </div>
           <div className="listCd">
             <TextField
               label="Data de Nascimento"
-              name="data_de_nascimento"
-              type="text"
+              name="data_de_Nascimento"
+              type="date"
               variant="outlined"
               margin="normal"
               className="custom-textfield"
-              value={formik.values.data_de_nascimento}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={formik.values.data_de_Nascimento}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={
-                formik.touched.data_de_nascimento &&
-                Boolean(formik.errors.data_de_nascimento)
+                formik.touched.data_de_Nascimento &&
+                Boolean(formik.errors.data_de_Nascimento)
               }
               helperText={
-                formik.touched.data_de_nascimento
-                  ? formik.errors.data_de_nascimento || ""
+                formik.touched.data_de_Nascimento
+                  ? formik.errors.data_de_Nascimento || ""
                   : ""
               }
-            ></TextField>
+            />
+
             <TextField
               label="Telefone"
               name="telefone"
