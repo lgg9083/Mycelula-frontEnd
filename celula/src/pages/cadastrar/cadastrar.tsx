@@ -1,44 +1,34 @@
 import { Button, TextField } from "@mui/material";
 import "./cadastrar.css";
 import { Link } from "react-router-dom";
-import validationSchema from "./validationSchema";
-import { useFormik } from "formik";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { BuscarCelulas } from "../../services/routes";
-import { useEffect } from "react";
-function Cadastrar() {
-  const { data, isLoading, isSuccess, isError, error } = useQuery({
-    queryKey: ["fetchCelulas"],
-    queryFn: BuscarCelulas,
-  });
-  console.log(data)
+import { useFormik } from "formik"; // Certifique-se de importar o useFormik
 
+function Cadastrar() {
   const formik = useFormik({
     initialValues: {
       nome: "",
       endereco: "",
       bairro: "",
-      data_de_nascimento: "",
       data_Batismo: "",
-      cidade: "",
+      data_de_nascimento: "",
       telefone: "",
+      cidade: "",
       email: "",
       senha: "",
     },
-    validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
     },
   });
+
   return (
-    <div className=" container">
+    <div className="container">
       <div className="cadastrar">
         <form onSubmit={formik.handleSubmit}>
-          <div className="listCd"></div>
           <div className="listCd">
             <TextField
               label="Nome"
-              name="nome"
+              name="Nome"
               type="text"
               variant="outlined"
               margin="normal"
@@ -51,7 +41,7 @@ function Cadastrar() {
             ></TextField>
             <TextField
               label="Endereco"
-              name="endereco"
+              name="Endereco"
               type="text"
               variant="outlined"
               margin="normal"
@@ -60,13 +50,15 @@ function Cadastrar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.endereco && Boolean(formik.errors.endereco)}
-              helperText={formik.touched.endereco ? formik.errors.endereco || "" : ""}
+              helperText={
+                formik.touched.endereco ? formik.errors.endereco || "" : ""
+              }
             ></TextField>
           </div>
           <div className="listCd">
             <TextField
               label="Bairro"
-              name="bairro"
+              name="Bairro"
               type="text"
               variant="outlined"
               margin="normal"
@@ -75,10 +67,13 @@ function Cadastrar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.bairro && Boolean(formik.errors.bairro)}
-              helperText={formik.touched.bairro ? formik.errors.bairro || "" : ""}            ></TextField>
+              helperText={
+                formik.touched.bairro ? formik.errors.bairro || "" : ""
+              }
+            ></TextField>
             <TextField
               label="Data do Batismo"
-              name="data_Batismo"
+              name="Data do Batismo"
               type="text"
               variant="outlined"
               margin="normal"
@@ -86,14 +81,21 @@ function Cadastrar() {
               value={formik.values.data_Batismo}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.touched.data_Batismo && Boolean(formik.errors.data_Batismo)}
-              helperText={formik.touched.data_Batismo ? formik.errors.data_Batismo || "" : ""}
+              error={
+                formik.touched.data_Batismo &&
+                Boolean(formik.errors.data_Batismo)
+              }
+              helperText={
+                formik.touched.data_Batismo
+                  ? formik.errors.data_Batismo || ""
+                  : ""
+              }
             ></TextField>
           </div>
           <div className="listCd">
             <TextField
               label="Data de Nascimento"
-              name="data_de_nascimento"
+              name="Data de Nascimento"
               type="text"
               variant="outlined"
               margin="normal"
@@ -101,11 +103,19 @@ function Cadastrar() {
               value={formik.values.data_de_nascimento}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.touched.data_de_nascimento && Boolean(formik.errors.data_de_nascimento)}
-              helperText={formik.touched.data_de_nascimento ? formik.errors.data_de_nascimento || "" : ""}            ></TextField>
+              error={
+                formik.touched.data_de_nascimento &&
+                Boolean(formik.errors.data_de_nascimento)
+              }
+              helperText={
+                formik.touched.data_de_nascimento
+                  ? formik.errors.data_de_nascimento || ""
+                  : ""
+              }
+            ></TextField>
             <TextField
               label="Telefone"
-              name="telefone"
+              name="Telefone"
               type="text"
               variant="outlined"
               margin="normal"
@@ -114,13 +124,15 @@ function Cadastrar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.telefone && Boolean(formik.errors.telefone)}
-              helperText={formik.touched.telefone ? formik.errors.telefone || "" : ""}
+              helperText={
+                formik.touched.telefone ? formik.errors.telefone || "" : ""
+              }
             ></TextField>
           </div>
           <div className="listCd">
             <TextField
               label="Cidade"
-              name="cidade"
+              name="Cidade"
               type="text"
               variant="outlined"
               margin="normal"
@@ -129,22 +141,28 @@ function Cadastrar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.cidade && Boolean(formik.errors.cidade)}
-              helperText={formik.touched.cidade ? formik.errors.cidade || "" : ""}
+              helperText={
+                formik.touched.cidade ? formik.errors.cidade || "" : ""
+              }
             ></TextField>
             <TextField
               label="Celula"
-              name="Celula"
+              name="celula"
               type="text"
               variant="outlined"
               margin="normal"
               className="custom-textfield"
-              // value={formik.values.senha}
+              // value={formik.values}
+              // onChange={formik.handleChange}
+              // onBlur={formik.handleBlur}
+              // error={formik.touched.celula && Boolean(formik.errors.celula)}
+              // helperText={formik.touched.celula ? formik.errors.celula || "" : ""}
             ></TextField>
           </div>
           <div className="listCd">
             <TextField
               label="Email"
-              name="email"
+              name="Email"
               type="email"
               variant="outlined"
               margin="normal"
@@ -157,7 +175,7 @@ function Cadastrar() {
             ></TextField>
             <TextField
               label="Senha"
-              name="senha"
+              name="Senha"
               type="password"
               variant="outlined"
               margin="normal"
@@ -171,7 +189,6 @@ function Cadastrar() {
           </div>
           <div className="listCd">
             <Button type="submit" variant="contained">
-              {" "}
               Cadastrar
             </Button>
           </div>
@@ -180,7 +197,6 @@ function Cadastrar() {
               Já possui uma conta?{" "}
               <span>
                 <Link to={"/"} className="link">
-                  {" "}
                   Clique aqui!
                 </Link>
               </span>
