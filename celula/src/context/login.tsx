@@ -16,12 +16,15 @@ export interface ILogin {
   token?: string | null;
   email?: string;
   setEmail: (email: string) => void;
+  senha?: string;
+  setSenha: (senha: string) => void;
 }
 
 // Valor inicial do contexto
 export const LoginContext = createContext<ILogin>({
   sendAccessToken: () => Promise.resolve({ data: { token: "" } }), // Retorne uma Promise resolvida para evitar erros de inicialização
   token: null,
+  setSenha: ()=>{},
   setEmail: () => {}, // Inicialize a função com uma implementação básica
   isPending: false,
   isError: false,

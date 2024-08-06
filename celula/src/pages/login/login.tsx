@@ -11,6 +11,7 @@ import { useLogin } from "../../hooks/useLogin";
 import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import { error } from "console";
+import { useAuth } from "../../hooks/useAuth";
 function Login() {
   const navigate = useNavigate();
   const formik = useFormik({
@@ -25,24 +26,21 @@ function Login() {
     sendAccessToken,
     setEmail,
     email,
-    token,
+    setSenha,
+
     isError,
     isPending,
     isSuccess,
   } = useLogin();
+
+  const { token } = useAuth();
   useEffect(() => {
-    if (token) {
-      console.log("aqui");
-      navigate(0);
+    if (!token) {
+      navigate("/");
+    } else {
+      navigate("/dashboard");
     }
   }, [token]);
-
-  const getErrorMessage = () => {
-    if (isError && AxiosError) {
-      console.log("aqui", AxiosError);
-    }
-    return "An error occurred";
-  };
 
   return (
     <>
@@ -83,7 +81,18 @@ function Login() {
               error={formik.touched.senha && Boolean(formik.errors.senha)}
               helperText={formik.touched.senha ? formik.errors.senha || "" : ""}
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={() => {
+                const email = formik.values.email;
+                const senha = formik.values.senha;
+                setEmail(email);
+                setSenha(senha);
+              }}
+            >
               Login
             </Button>
             <p className="semConta">

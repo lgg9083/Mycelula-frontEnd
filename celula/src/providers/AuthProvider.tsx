@@ -3,12 +3,16 @@ import AuthContext, { IAuth } from "../context/auth";
 
 const STORAGE_KEY = "token";
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem(STORAGE_KEY));
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem(STORAGE_KEY)
+  );
 
   useEffect(() => {
     const storedToken = localStorage.getItem(STORAGE_KEY);
-    console.log('olha o token', token)
+
     if (storedToken) {
       setToken(storedToken);
     }
@@ -31,8 +35,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
