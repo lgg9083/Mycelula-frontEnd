@@ -8,7 +8,20 @@ import celula from "../../images/celulas.png";
 import logo from "../../images/logo.png";
 import NavBar from "../../components/NavBar";
 import { Button } from "@mui/material";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import { buscarMembroPorId, listarReunioes } from "../../services/routes";
+import { IBusca } from "../../services/routes";
+
 function Dashboard() {
+  const { data, error, isError, isPending } = useQuery({
+    queryKey: ["reuniao"],
+    queryFn: async () => {
+      const response = await listarReunioes();
+      console.log(response.data);
+      return response.data;
+    },
+  });
+
   const navigate = useNavigate();
   const [celulas, setCelulas] = useState(false);
   const { token } = useAuth();
@@ -37,7 +50,7 @@ function Dashboard() {
                 onClick={() => {
                   if (celulas === false) {
                     setCelulas(true);
-                  }else {
+                  } else {
                     setCelulas(false);
                   }
                 }}
@@ -51,7 +64,23 @@ function Dashboard() {
 
         <div className="conteudo">
           {celulas ? (
-            <div> reunioes</div>
+            <div className="containerCard">
+              {data.map((reuniao: any) => (
+                <div key={reuniao.id} className="card">
+                  <h3>{reuniao.celula?.nome}</h3>
+                  <p>Data: {reuniao.date}</p>
+                  <p>Endereço: {reuniao.celula?.endereco_Da_Celula}</p>
+                  <p>Lider da celula: {reuniao.celula?.nome_Lider}</p>
+                  <p> Louvor: {reuniao.responvel_Louvor?.nome}</p>
+                  <p> Palavra: {reuniao.responvel_palavra?.nome}</p>
+                  <p> Quebra-Gelo: {reuniao.responvel_quebragelo?.nome}</p>
+                  <p>Membros : {reuniao.membros?.map((membro:any)=>{
+                    return `${membro.nome}, `;
+                  })}</p>
+                  
+                </div>
+              ))}
+            </div>
           ) : (
             <>
               <img src={logo} alt="logo" />
