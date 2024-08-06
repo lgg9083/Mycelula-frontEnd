@@ -5,6 +5,9 @@ export interface ILogin {
   email: string;
   senha: string;
 }
+export interface IBusca {
+  id: number;
+}
 export interface IMembros {
   nome: string;
   endereco: string;
@@ -28,9 +31,17 @@ export const BuscarCelulas = async (): Promise<any> => {
   const response = await axiosInstance.get("/celula");
   return response;
 };
-
+export const buscarMembroPorId = async(data: IBusca): Promise<any> => {
+  const response = await axiosInstance.get(`/membros/${data}`);
+  return response;
+}
 export const criarMembro = async (dados: IMembros): Promise<any> => {
   const response = await axiosInstance.post("/membros", dados);
   console.log(response);
   return response;
+
 };
+export const listarReunioes = async() :Promise<any> =>{
+  const response = await axiosInstance.get("/reuniao");
+  return response;
+}
