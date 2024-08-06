@@ -11,8 +11,7 @@ function NavBar (){
                 <p>GetCelula</p>
             </div>
             <ul>
-                <li >Home</li>
-                <li>About</li>
+             
                 <li onClick={()=> logout()}>Sair</li>
             </ul>
         </nav>
