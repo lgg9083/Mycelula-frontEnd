@@ -1,7 +1,9 @@
 import React from "react";
 import style from './navBar.module.css'
 import logo from '../../images/image.png'
+import { useAuth } from "../../hooks/useAuth";
 function NavBar (){
+    const {logout} = useAuth()
     return (
         <nav className={style.navBar}>
             <div className={style.title}>
@@ -9,9 +11,9 @@ function NavBar (){
                 <p>GetCelula</p>
             </div>
             <ul>
-                <li>Home</li>
+                <li >Home</li>
                 <li>About</li>
-                <li>Contact</li>
+                <li onClick={()=> logout()}>Sair</li>
             </ul>
         </nav>
     )
