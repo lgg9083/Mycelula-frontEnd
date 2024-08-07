@@ -41,6 +41,10 @@ export const criarMembro = async (dados: IMembros): Promise<any> => {
   return response;
 
 };
+export const listarMembro = async()=>{
+  const response = await axiosInstance.get("/membros");
+  return response;
+}
 export const listarReunioes = async() :Promise<any> =>{
   const response = await axiosInstance.get("/reuniao");
   return response;
