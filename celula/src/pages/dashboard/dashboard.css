@@ -32,6 +32,7 @@ body {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
+  background-color: rgba(0, 0, 0, 0.437);
   gap: 10px;
   min-width: 300px;
   max-width: 300px;
@@ -40,6 +41,11 @@ body {
 }
 .card p {
     margin-top: 10px;
+    color: rgba(255, 255, 255, 0.588);
+}
+.card h3 {
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.726);
 }
 .barra {
   width: 300px;
