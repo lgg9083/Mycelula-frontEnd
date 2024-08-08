@@ -12,7 +12,9 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { buscarMembroPorId, listarReunioes } from "../../services/routes";
 import { IBusca } from "../../services/routes";
 import Membros from "../../utils/membros";
-
+import Celulas from "../../utils/celulas";
+import ReuniaoIds from "../../utils/reuniaoId";
+import { number } from "yup";
 function Dashboard() {
   const { data, error, isError, isPending } = useQuery({
     queryKey: ["reuniao"],
@@ -24,8 +26,11 @@ function Dashboard() {
   });
 
   const navigate = useNavigate();
-  const [celulas, setCelulas] = useState(false);
+  const [reuniao, setreuniao] = useState(false);
   const [membrosss, setMembrosss] = useState(false);
+  const [celulas, setcelulas] = useState(false);
+  const [reuniaoId, setReuniaoId] = useState(false);
+  const [id, setid] = useState(number);
   const { token } = useAuth();
   useEffect(() => {
     if (!token) {
@@ -44,13 +49,15 @@ function Dashboard() {
                 onClick={() => {
                   if (celulas === false) {
                     setMembrosss(false);
-                    setCelulas(true);
+                    setreuniao(false);
+                    setReuniaoId(false);
+                    setcelulas(true);
                     return;
                   }
-                  setCelulas(false);
+                  setcelulas(false);
                 }}
               >
-                Celulas
+                celula
               </Button>
             </div>
             <div className="membros">
@@ -58,7 +65,9 @@ function Dashboard() {
               <Button
                 onClick={() => {
                   if (membrosss === false) {
-                    setCelulas(false);
+                    setreuniao(false);
+                    setcelulas(false);
+                    setReuniaoId(false);
                     setMembrosss(true);
                     return;
                   }
@@ -71,34 +80,57 @@ function Dashboard() {
             </div>
             <div className="reunioes">
               <img src={reunioes} alt=" reunioes" />
-              <Button> Reuniões</Button>
+              <Button
+                onClick={() => {
+                  if (reuniao === false) {
+                    setMembrosss(false);
+                    setcelulas(false);
+                    setReuniaoId(false);
+                    setreuniao(true);
+                    return;
+                  }
+                  setreuniao(false);
+                }}
+              >
+                {" "}
+                Reuniões
+              </Button>
             </div>
           </div>
         </div>
 
         <div className="conteudo">
-          {celulas && celula ? (
+          {reuniao ? (
             <div className="containerCard">
               {data.map((reuniao: any) => (
                 <div key={reuniao.id} className="card">
                   <h3>{reuniao.celula?.nome}</h3>
                   <p>Data: {reuniao.date}</p>
                   <p>Endereço: {reuniao.celula?.endereco_Da_Celula}</p>
-                  <p>Líder da célula: {reuniao.celula?.nome_Lider}</p>
-                  <p>Louvor: {reuniao.responvel_Louvor?.nome}</p>
-                  <p>Palavra: {reuniao.responvel_palavra?.nome}</p>
-                  <p>Quebra-Gelo: {reuniao.responvel_quebragelo?.nome}</p>
-                  <p>
-                    Membros:{" "}
-                    {reuniao.membros && reuniao.membros.length > 0
-                      ? reuniao.membros.map((membro: any) => `${membro.nome}, `)
-                      : "Nenhum membro cadastrado"}
-                  </p>
+                  <Button
+                    onClick={() => {
+                      if (reuniaoId === false) {
+                        setreuniao(false);
+                        setcelulas(false);
+                        setMembrosss(false);
+                        setReuniaoId(true);
+                        setid(reuniao.id);
+                        return;
+                      }
+                      setReuniaoId(false);
+                    }}
+                  >
+                    Ver detalhes
+                  </Button>
                 </div>
               ))}
             </div>
           ) : membrosss ? (
             <Membros />
+          ) : celulas ? (
+            <Celulas />
+          ) : reuniaoId ? (
+            <ReuniaoIds id={Number(id)} />
           ) : (
             <>
               <img src={logo} alt="logo" />
