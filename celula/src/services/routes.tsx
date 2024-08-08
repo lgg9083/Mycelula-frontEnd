@@ -1,4 +1,3 @@
-
 import { axiosInstance } from ".";
 
 export interface ILogin {
@@ -31,21 +30,29 @@ export const BuscarCelulas = async (): Promise<any> => {
   const response = await axiosInstance.get("/celula");
   return response;
 };
-export const buscarMembroPorId = async(data: IBusca): Promise<any> => {
+export const buscarMembroPorId = async (data: IBusca): Promise<any> => {
   const response = await axiosInstance.get(`/membros/${data}`);
   return response;
-}
+};
 export const criarMembro = async (dados: IMembros): Promise<any> => {
   const response = await axiosInstance.post("/membros", dados);
   console.log(response);
   return response;
-
 };
-export const listarMembro = async()=>{
+export const listarMembro = async () => {
   const response = await axiosInstance.get("/membros");
   return response;
-}
-export const listarReunioes = async() :Promise<any> =>{
+};
+export const listarReunioes = async (): Promise<any> => {
   const response = await axiosInstance.get("/reuniao");
   return response;
-}
+};
+
+export const listarReunioesId = async (id: number): Promise<any> => {
+  const response = await axiosInstance.get(`/reuniao/${id}`);
+  return response;
+};
+export const listarCelula = async (): Promise<any> => {
+  const response = await axiosInstance.get("/celula");
+  return response;
+};
