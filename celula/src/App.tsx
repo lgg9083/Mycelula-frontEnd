@@ -3,6 +3,7 @@ import Login from "./pages/login/login";
 import React from "react";
 import Cadastrar from "./pages/cadastrar/cadastrar";
 import Dashboard from "./pages/dashboard/dashboard";
+
 function App() {
   return (
     <Router>
