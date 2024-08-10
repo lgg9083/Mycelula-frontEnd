@@ -13,6 +13,8 @@
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "formik": "^2.4.6",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1",
@@ -45,6 +47,8 @@
     ]
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/jwt-decode": "^3.1.0",
     "@types/node": "^22.0.0"
   }
 }

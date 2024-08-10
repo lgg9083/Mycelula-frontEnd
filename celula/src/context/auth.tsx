@@ -4,6 +4,7 @@ import React, { createContext, ReactNode } from "react";
 export interface IAuth {
   logout: () => void;
   token: string | null;
+  celulaName: string | null;
   updateToken: (token: string) => void;
 }
 
