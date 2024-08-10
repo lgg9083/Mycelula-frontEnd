@@ -11,7 +11,7 @@ interface MyTokenPayload {
   email: string;
   exp: number;
   iat: number;
-  celula: Mycelula; // Adicione outras propriedades conforme necessário
+  celula: Mycelula;
 }
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
@@ -20,7 +20,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [token, setToken] = useState<string | null>(
     localStorage.getItem(STORAGE_KEY)
   );
-  const [celulaName, setCelulaName] = useState<string | null>('')
+  const [celulaName, setCelulaName] = useState<string | null>("");
 
   useEffect(() => {
     const storedToken = localStorage.getItem(STORAGE_KEY);
@@ -28,7 +28,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     if (storedToken) {
       const decodedToken = jwtDecode<MyTokenPayload>(storedToken);
       console.log("decode", decodedToken.celula.nome);
-      setCelulaName(decodedToken.celula.nome)
+      setCelulaName(decodedToken.celula.nome);
       setToken(storedToken);
     }
   }, []);
