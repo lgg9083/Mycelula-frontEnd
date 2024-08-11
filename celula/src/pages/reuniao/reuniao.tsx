@@ -89,34 +89,34 @@ function Reuniao() {
                 variant="filled"
                 margin="normal"
                 className="custom-textfield"
-                // error={formik.touched.celula && Boolean(formik.errors.celula)}
+                error={formik.touched.responsavel_palavra && Boolean(formik.errors.responsavel_palavra)}
                 sx={{ width: "330px" }}
               >
                 <InputLabel>Responsavel Palavra</InputLabel>
                 <Select
-                  name="celula"
-                  //   value={formik.values.celula}
-                  //   onChange={formik.handleChange}
-                  //   onBlur={formik.handleBlur}
-                  //   renderValue={(selected: any): React.ReactNode => {
-                  //     const selectedItem = data?.data?.find((item: any) => item.id === selected);
-                  //     return selectedItem ? selectedItem.nome : "Selecione uma Celula";
-                  //   }}
+                  name="responsavel_palavra"
+                    value={formik.values.responsavel_palavra}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    renderValue={(selected: any): React.ReactNode => {
+                      const selectedItem = data?.find((item: any) => item.id === selected);
+                      return selectedItem ? selectedItem : "Selecione uma Celula";
+                    }}
                 >
-                  {/* {data
-                    ? data.data.map((item: any) => (
+                  {data
+                    ? data.map((item: any) => (
                         <MenuItem key={item.id} value={item.id}>
                           {item.nome}
                         </MenuItem>
                       ))
                     : null}
                   <MenuItem value="">
-                    <em>Selecione uma Celula</em>
-                  </MenuItem> */}
+                    <em>Selecione um membro</em>
+                  </MenuItem>
                 </Select>
-                {/* {formik.touched.celula && formik.errors.celula && (
-                  <FormHelperText>{formik.errors.celula}</FormHelperText>
-                )} */}
+                {formik.touched.responsavel_palavra && formik.errors.responsavel_palavra && (
+                  <FormHelperText>{formik.errors.responsavel_palavra}</FormHelperText>
+                )}
               </FormControl>
               <FormControl
                 variant="filled"
