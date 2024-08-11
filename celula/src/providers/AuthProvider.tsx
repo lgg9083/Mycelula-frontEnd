@@ -5,6 +5,7 @@ const STORAGE_KEY = "token";
 
 interface Mycelula {
   nome: string;
+  id: number;
 }
 interface MyTokenPayload {
   userId: string;
@@ -20,15 +21,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [token, setToken] = useState<string | null>(
     localStorage.getItem(STORAGE_KEY)
   );
-  const [celulaName, setCelulaName] = useState<string | null>("");
+  const [celulaName, setCelulaName] = useState<number | undefined>();
 
   useEffect(() => {
     const storedToken = localStorage.getItem(STORAGE_KEY);
 
     if (storedToken) {
       const decodedToken = jwtDecode<MyTokenPayload>(storedToken);
-      console.log("decode", decodedToken.celula.nome);
-      setCelulaName(decodedToken.celula.nome);
+      
+      setCelulaName(decodedToken.celula.id);
       setToken(storedToken);
     }
   }, []);
