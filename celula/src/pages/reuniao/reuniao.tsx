@@ -8,7 +8,22 @@ import {
 } from "@mui/material";
 import NavBar from "../../components/NavBar";
 import "./reuniao.css";
+import { useFormik } from "formik";
 function Reuniao() {
+    const formik = useFormik({
+        initialValues:{
+            date: '',
+            celula: '',
+            responsavel_louvor: '',
+            responsavel_palavra: '',
+            responsavel_quebragelo: '',
+            membros: [],
+        },
+        // validationSchema: validationSchema,
+        onSubmit: (values) => {
+            console.log(values);
+        },
+    })
   return (
     <>
       <NavBar />
