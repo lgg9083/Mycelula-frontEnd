@@ -9,7 +9,9 @@ import {
 import NavBar from "../../components/NavBar";
 import "./reuniao.css";
 import { useFormik } from "formik";
+import { useState } from "react";
 function Reuniao() {
+  const [data, setdata] = useState([]);
   const formik = useFormik({
     initialValues: {
       date: "",
@@ -56,28 +58,30 @@ function Reuniao() {
                 <InputLabel>Responsavel Louvor</InputLabel>
                 <Select
                   name="celula"
-                  //   value={formik.values.celula}
-                  //   onChange={formik.handleChange}
-                  //   onBlur={formik.handleBlur}
-                  //   renderValue={(selected: any): React.ReactNode => {
-                  //     const selectedItem = data?.data?.find((item: any) => item.id === selected);
-                  //     return selectedItem ? selectedItem.nome : "Selecione uma Celula";
-                  //   }}
+                  value={formik.values.responsavel_louvor}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  renderValue={(selected: any): React.ReactNode => {
+                    const selectedItem = data?.find(
+                      (item: any) => item.id === selected
+                    );
+                    return selectedItem ? selectedItem : "Selecione uma Celula"; //selecteditem.nome
+                  }}
                 >
-                  {/* {data
-                    ? data.data.map((item: any) => (
+                  {data
+                    ? data.map((item: any) => (
                         <MenuItem key={item.id} value={item.id}>
                           {item.nome}
                         </MenuItem>
                       ))
                     : null}
                   <MenuItem value="">
-                    <em>Selecione uma Celula</em>
-                  </MenuItem> */}
+                    <em>Selecione uma membro</em>
+                  </MenuItem>
                 </Select>
-                {/* {formik.touched.celula && formik.errors.celula && (
-                  <FormHelperText>{formik.errors.celula}</FormHelperText>
-                )} */}
+                {formik.touched.responsavel_louvor && formik.errors.responsavel_louvor && (
+                  <FormHelperText>{formik.errors.responsavel_louvor}</FormHelperText>
+                )}
               </FormControl>
             </div>
             <div className="listCd">
