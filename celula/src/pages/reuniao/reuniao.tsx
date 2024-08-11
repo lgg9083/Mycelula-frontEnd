@@ -10,20 +10,20 @@ import NavBar from "../../components/NavBar";
 import "./reuniao.css";
 import { useFormik } from "formik";
 function Reuniao() {
-    const formik = useFormik({
-        initialValues:{
-            date: '',
-            celula: '',
-            responsavel_louvor: '',
-            responsavel_palavra: '',
-            responsavel_quebragelo: '',
-            membros: [],
-        },
-        // validationSchema: validationSchema,
-        onSubmit: (values) => {
-            console.log(values);
-        },
-    })
+  const formik = useFormik({
+    initialValues: {
+      date: "",
+      celula: "",
+      responsavel_louvor: "",
+      responsavel_palavra: "",
+      responsavel_quebragelo: "",
+      membros: [],
+    },
+    // validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <>
       <NavBar />
@@ -40,12 +40,11 @@ function Reuniao() {
                 InputLabelProps={{ shrink: true }}
                 className="custom-textfield"
                 sx={{ width: "330px" }}
-
-                // value={formik.values.nome}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
-                // error={formik.touched.nome && Boolean(formik.errors.nome)}
-                // helperText={formik.touched.nome && formik.errors.nome}
+                value={formik.values.date}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.date && Boolean(formik.errors.date)}
+                helperText={formik.touched.date && formik.errors.date}
               />
               <FormControl
                 variant="filled"
@@ -150,7 +149,6 @@ function Reuniao() {
               </FormControl>
             </div>
             <div className="listCd">
-             
               <FormControl
                 variant="filled"
                 margin="normal"
