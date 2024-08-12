@@ -36,10 +36,10 @@ function Reuniao() {
   const formik = useFormik({
     initialValues: {
       date: "",
-      celula: "",
-      responsavel_louvor: "",
-      responsavel_palavra: "",
-      responsavel_quebragelo: "",
+      idCelula: "",
+      responvel_Louvor: "",
+      responvel_palavra: "",
+      responvel_quebragelo: "",
       membros: [],
     },
     validationSchema: validationSchema,
@@ -75,15 +75,15 @@ function Reuniao() {
                 margin="normal"
                 className="custom-textfield"
                 error={
-                  formik.touched.responsavel_louvor &&
-                  Boolean(formik.errors.responsavel_louvor)
+                  formik.touched.responvel_Louvor &&
+                  Boolean(formik.errors.responvel_Louvor)
                 }
                 sx={{ width: "330px" }}
               >
                 <InputLabel>Responsavel Louvor</InputLabel>
                 <Select
-                  name="responsavel_louvor"
-                  value={formik.values.responsavel_louvor}
+                  name="responvel_Louvor"
+                  value={formik.values.responvel_Louvor}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
@@ -105,10 +105,10 @@ function Reuniao() {
                   </MenuItem>
                 </Select>
 
-                {formik.touched.responsavel_louvor &&
-                  formik.errors.responsavel_louvor && (
+                {formik.touched.responvel_Louvor &&
+                  formik.errors.responvel_Louvor && (
                     <FormHelperText>
-                      {formik.errors.responsavel_louvor}
+                      {formik.errors.responvel_Louvor}
                     </FormHelperText>
                   )}
               </FormControl>
@@ -119,15 +119,15 @@ function Reuniao() {
                 margin="normal"
                 className="custom-textfield"
                 error={
-                  formik.touched.responsavel_palavra &&
-                  Boolean(formik.errors.responsavel_palavra)
+                  formik.touched.responvel_palavra &&
+                  Boolean(formik.errors.responvel_palavra)
                 }
                 sx={{ width: "330px" }}
               >
                 <InputLabel>Responsavel Palavra</InputLabel>
                 <Select
-                  name="responsavel_palavra"
-                  value={formik.values.responsavel_palavra}
+                  name="responvel_palavra"
+                  value={formik.values.responvel_palavra}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
@@ -151,10 +151,10 @@ function Reuniao() {
                   </MenuItem>
                 </Select>
 
-                {formik.touched.responsavel_palavra &&
-                  formik.errors.responsavel_palavra && (
+                {formik.touched.responvel_palavra &&
+                  formik.errors.responvel_palavra && (
                     <FormHelperText>
-                      {formik.errors.responsavel_palavra}
+                      {formik.errors.responvel_palavra}
                     </FormHelperText>
                   )}
               </FormControl>
@@ -163,15 +163,15 @@ function Reuniao() {
                 margin="normal"
                 className="custom-textfield"
                 error={
-                  formik.touched.responsavel_quebragelo &&
-                  Boolean(formik.errors.responsavel_quebragelo)
+                  formik.touched.responvel_quebragelo &&
+                  Boolean(formik.errors.responvel_quebragelo)
                 }
                 sx={{ width: "330px" }}
               >
                 <InputLabel>Responsavel quebra gelo</InputLabel>
                 <Select
-                  name="responsavel_quebragelo"
-                  value={formik.values.responsavel_quebragelo}
+                  name="responvel_quebragelo"
+                  value={formik.values.responvel_quebragelo}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
@@ -194,10 +194,10 @@ function Reuniao() {
                     <em>Selecione um membro</em>
                   </MenuItem>
                 </Select>
-                {formik.touched.responsavel_quebragelo &&
-                  formik.errors.responsavel_quebragelo && (
+                {formik.touched.responvel_quebragelo &&
+                  formik.errors.responvel_quebragelo && (
                     <FormHelperText>
-                      {formik.errors.responsavel_quebragelo}
+                      {formik.errors.responvel_quebragelo}
                     </FormHelperText>
                   )}
               </FormControl>
@@ -207,13 +207,13 @@ function Reuniao() {
                 variant="filled"
                 margin="normal"
                 className="custom-textfield"
-                error={formik.touched.celula && Boolean(formik.errors.celula)}
+                error={formik.touched.idCelula && Boolean(formik.errors.idCelula)}
                 sx={{ width: "330px" }}
               >
                 <InputLabel>Celula</InputLabel>
                 <Select
-                  name="celula"
-                  value={formik.values.celula || ""}
+                  name="idCelula"
+                  value={formik.values.idCelula}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
@@ -236,8 +236,8 @@ function Reuniao() {
                     <em>Selecione uma Celula</em>
                   </MenuItem>
                 </Select>
-                {formik.touched.celula && formik.errors.celula && (
-                  <FormHelperText>{formik.errors.celula}</FormHelperText>
+                {formik.touched.idCelula && formik.errors.idCelula && (
+                  <FormHelperText>{formik.errors.idCelula}</FormHelperText>
                 )}
               </FormControl>
               <FormControl
