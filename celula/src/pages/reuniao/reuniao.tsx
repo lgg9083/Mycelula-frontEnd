@@ -28,6 +28,7 @@ function Reuniao() {
     queryKey: ["membrocelula"],
     queryFn: async () => {
       const response = await buscarCelularId(celulaName ?? null);
+      console.log(response);
       return response;
     },
   });
@@ -236,22 +237,22 @@ function Reuniao() {
                   value={formik.values.idCelula}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  renderValue={(selected) => {
-                    const selectedMember = data?.Membros.find(
-                      (membro: any) => membro.idMembro === selected
-                    );
-                    return selectedMember
-                      ? selectedMember.nome
-                      : "Selecione um membro";
+                  renderValue={(selected: any) => {
+                    if (!data || typeof data !== "object") {
+                      return "Selecione uma Celula";
+                    }
+
+                    // `selected` deve corresponder ao `id` do objeto `data`.
+                    return data.id === selected
+                      ? data.nome
+                      : "Selecione uma Celula";
                   }}
                 >
-                  {data
-                    ? data.Membros.map((item: any) => (
-                        <MenuItem key={item.idMembro} value={item.idMembro}>
-                          {item.nome}
-                        </MenuItem>
-                      ))
-                    : null}
+                  {data ? (
+                    <MenuItem key={data.id} value={data.id}>
+                      {data.nome}
+                    </MenuItem>
+                  ) : null}
                   <MenuItem value="">
                     <em>Selecione uma Celula</em>
                   </MenuItem>
