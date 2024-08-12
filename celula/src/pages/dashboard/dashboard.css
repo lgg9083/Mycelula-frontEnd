@@ -126,3 +126,13 @@ body {
   background-color: #757575;
   gap: 10px;
 }
+.buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+.buttons button {
+  background-color: aliceblue;
+  text-transform: none;
+}

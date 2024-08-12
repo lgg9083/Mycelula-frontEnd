@@ -107,21 +107,24 @@ function Dashboard() {
                   <h3>{reuniao.celula?.nome}</h3>
                   <p>Data: {reuniao.date}</p>
                   <p>Endereço: {reuniao.celula?.endereco_Da_Celula}</p>
-                  <Button
-                    onClick={() => {
-                      if (reuniaoId === false) {
-                        setreuniao(false);
-                        setcelulas(false);
-                        setMembrosss(false);
-                        setReuniaoId(true);
-                        setid(reuniao.id);
-                        return;
-                      }
-                      setReuniaoId(false);
-                    }}
-                  >
-                    Ver detalhes
-                  </Button>
+                  <div className="buttons">
+                    <Button
+                      onClick={() => {
+                        if (reuniaoId === false) {
+                          setreuniao(false);
+                          setcelulas(false);
+                          setMembrosss(false);
+                          setReuniaoId(true);
+                          setid(reuniao.id);
+                          return;
+                        }
+                        setReuniaoId(false);
+                      }}
+                    >
+                      Ver detalhes
+                    </Button>
+                    <Button>Editar</Button>
+                  </div>
                 </div>
               ))}
             </div>
