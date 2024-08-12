@@ -63,7 +63,6 @@ function Reuniao() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       criarreuniao(values);
     },
   });
