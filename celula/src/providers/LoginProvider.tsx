@@ -4,6 +4,8 @@ import { AxiosResponse, AxiosError } from "axios";
 import { ILogin, LoginCount } from "../services/routes";
 import { LoginContext } from "../context/login";
 import { useAuth } from "../hooks/useAuth";
+import { jwtDecode } from "jwt-decode";
+import { MyTokenPayload } from "./AuthProvider";
 
 interface ILoginProviderProps {
   children: React.ReactNode;
@@ -12,7 +14,7 @@ interface ILoginProviderProps {
 export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
-  const { updateToken } = useAuth();
+  const { updateToken, celulaName, setCelulaName } = useAuth();
   const {
     mutate: sendAccessToken,
     isPending,
@@ -21,15 +23,16 @@ export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
     isError,
   } = useMutation<AxiosResponse<{ token: string }>, AxiosError, ILogin>({
     mutationFn: async (data: ILogin) => {
-      console.log('aq')
       const response = await LoginCount(data);
       updateToken(response.data.token);
-      
+      const decodedToken = jwtDecode<MyTokenPayload>(response.data.token);
+
+      console.log(decodedToken);
+
       return response;
     },
   });
 
-  console.log(responseData, 'responseData');
   const token = responseData?.data.token;
 
   return (
@@ -37,14 +40,14 @@ export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
       value={{
         sendAccessToken,
         setEmail,
-        email, 
-        senha, 
+        email,
+        senha,
         setSenha,
         token,
+        celulaName,
         isPending,
         isSuccess,
-        isError
-        
+        isError,
       }}
     >
       {children}

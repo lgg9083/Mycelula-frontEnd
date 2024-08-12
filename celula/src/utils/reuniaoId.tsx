@@ -36,9 +36,7 @@ function ReuniaoIds({ id }: { id: number }): JSX.Element {
   });
   return (
     <div className="containercard">
-      {isLoading ? (
-        <p>Carregando...</p>
-      ) : (
+      {
         <div className="card">
           <p>Nome da celula : {data?.celula?.nome}</p>
           <p>Endereço da celula: {data?.celula?.endereco_Da_Celula}</p>
@@ -55,7 +53,7 @@ function ReuniaoIds({ id }: { id: number }): JSX.Element {
             {data?.membros.map((membro: IMembros) => `${membro.nome}`)}
           </p>
         </div>
-      )}
+      }
     </div>
   );
 }

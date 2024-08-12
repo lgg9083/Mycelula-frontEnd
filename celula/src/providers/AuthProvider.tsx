@@ -7,12 +7,9 @@ interface Mycelula {
   nome: string;
   id: number;
 }
-interface MyTokenPayload {
-  userId: string;
-  email: string;
-  exp: number;
-  iat: number;
-  celula: Mycelula;
+export interface MyTokenPayload {
+ 
+  celula: number;
 }
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
@@ -21,16 +18,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [token, setToken] = useState<string | null>(
     localStorage.getItem(STORAGE_KEY)
   );
-  const [celulaName, setCelulaName] = useState<number | undefined>();
+  const [celulaName, setCelulaName] = useState<number | null>();
 
   useEffect(() => {
     const storedToken = localStorage.getItem(STORAGE_KEY);
-
+    console.log("chamando");
     if (storedToken) {
       const decodedToken = jwtDecode<MyTokenPayload>(storedToken);
-      
-      setCelulaName(decodedToken.celula.id);
+
       setToken(storedToken);
+      console.log(decodedToken.celula);
+      setCelulaName(decodedToken.celula);
     }
   }, []);
 
@@ -47,6 +45,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const contextValue: IAuth = {
     token,
     celulaName,
+    setCelulaName,
     updateToken,
     logout,
   };

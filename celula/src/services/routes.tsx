@@ -19,9 +19,7 @@ export interface IMembros {
   senha: string;
   celula: string;
 }
-export interface IdCelula {
-  id: number;
-}
+
 export const LoginCount = async (dados: ILogin): Promise<any> => {
   console.log(dados, "aqui");
 
@@ -34,9 +32,10 @@ export const BuscarCelulas = async (): Promise<any> => {
   return response;
 };
 
-export const buscarCelularId = async (data: IdCelula): Promise<any> => {
-  const response = await axiosInstance.get(`/celula/${data}`);
-  return response;
+export const buscarCelularId = async (id: number | null): Promise<any> => {
+  console.log(id, "id");
+  const response = await axiosInstance.get(`/celula/${id}`);
+  return response.data;
 };
 export const buscarMembroPorId = async (data: IBusca): Promise<any> => {
   const response = await axiosInstance.get(`/membros/${data}`);

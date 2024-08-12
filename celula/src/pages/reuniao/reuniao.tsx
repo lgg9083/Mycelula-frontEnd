@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -9,9 +10,29 @@ import {
 import NavBar from "../../components/NavBar";
 import "./reuniao.css";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { buscarCelularId } from "../../services/routes";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import validationSchema from "./ValidationSchema";
 function Reuniao() {
-  const [data, setdata] = useState([]);
+  const { token, celulaName } = useAuth();
+  const { data, isError, isLoading, isSuccess, error } = useQuery({
+    queryKey: ["membrocelula"],
+    queryFn: async () => {
+      const response = await buscarCelularId(celulaName ?? null);
+      return response;
+    },
+  });
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, [token]);
+
   const formik = useFormik({
     initialValues: {
       date: "",
@@ -21,8 +42,9 @@ function Reuniao() {
       responsavel_quebragelo: "",
       membros: [],
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
     onSubmit: (values) => {
+      console.log("chegabdo");
       console.log(values);
     },
   });
@@ -31,7 +53,7 @@ function Reuniao() {
       <NavBar />
       <div className="container">
         <div className="cadastrarReuniao">
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <div className="listCd">
               <TextField
                 label="Data"
@@ -42,7 +64,7 @@ function Reuniao() {
                 InputLabelProps={{ shrink: true }}
                 className="custom-textfield"
                 sx={{ width: "330px" }}
-                value={formik.values.date}
+                value={formik.values.date || ""}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={formik.touched.date && Boolean(formik.errors.date)}
@@ -52,7 +74,10 @@ function Reuniao() {
                 variant="filled"
                 margin="normal"
                 className="custom-textfield"
-                // error={formik.touched.celula && Boolean(formik.errors.celula)}
+                error={
+                  formik.touched.responsavel_louvor &&
+                  Boolean(formik.errors.responsavel_louvor)
+                }
                 sx={{ width: "330px" }}
               >
                 <InputLabel>Responsavel Louvor</InputLabel>
@@ -61,24 +86,25 @@ function Reuniao() {
                   value={formik.values.responsavel_louvor}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  renderValue={(selected: any): React.ReactNode => {
-                    const selectedItem = data?.find(
-                      (item: any) => item.id === selected
+                  renderValue={(selected) => {
+                    const selectedMember = data?.Membros.find(
+                      (membro: any) => membro.idMembro === selected
                     );
-                    return selectedItem ? selectedItem : "Selecione uma Celula"; //selecteditem.nome
+                    return selectedMember
+                      ? selectedMember.nome
+                      : "Selecione um membro";
                   }}
                 >
-                  {data
-                    ? data.map((item: any) => (
-                        <MenuItem key={item.id} value={item.id}>
-                          {item.nome}
-                        </MenuItem>
-                      ))
-                    : null}
+                  {data?.Membros.map((item: any) => (
+                    <MenuItem key={item.idMembro} value={item.idMembro}>
+                      {item.nome}
+                    </MenuItem>
+                  ))}
                   <MenuItem value="">
                     <em>Selecione um membro</em>
                   </MenuItem>
                 </Select>
+
                 {formik.touched.responsavel_louvor &&
                   formik.errors.responsavel_louvor && (
                     <FormHelperText>
@@ -104,16 +130,18 @@ function Reuniao() {
                   value={formik.values.responsavel_palavra}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  renderValue={(selected: any): React.ReactNode => {
-                    const selectedItem = data?.find(
-                      (item: any) => item.id === selected
+                  renderValue={(selected) => {
+                    const selectedMember = data?.Membros.find(
+                      (membro: any) => membro.idMembro === selected
                     );
-                    return selectedItem ? selectedItem : "Selecione uma Celula";
+                    return selectedMember
+                      ? selectedMember.nome
+                      : "Selecione um membro";
                   }}
                 >
                   {data
-                    ? data.map((item: any) => (
-                        <MenuItem key={item.id} value={item.id}>
+                    ? data.Membros.map((item: any) => (
+                        <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
                       ))
@@ -122,6 +150,7 @@ function Reuniao() {
                     <em>Selecione um membro</em>
                   </MenuItem>
                 </Select>
+
                 {formik.touched.responsavel_palavra &&
                   formik.errors.responsavel_palavra && (
                     <FormHelperText>
@@ -145,16 +174,18 @@ function Reuniao() {
                   value={formik.values.responsavel_quebragelo}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  renderValue={(selected: any): React.ReactNode => {
-                    const selectedItem = data?.find(
-                      (item: any) => item.id === selected
+                  renderValue={(selected) => {
+                    const selectedMember = data?.Membros.find(
+                      (membro: any) => membro.idMembro === selected
                     );
-                    return selectedItem ? selectedItem : "Selecione uma Celula";
+                    return selectedMember
+                      ? selectedMember.nome
+                      : "Selecione um membro";
                   }}
                 >
                   {data
-                    ? data.map((item: any) => (
-                        <MenuItem key={item.id} value={item.id}>
+                    ? data.Membros.map((item: any) => (
+                        <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
                       ))
@@ -182,19 +213,21 @@ function Reuniao() {
                 <InputLabel>Celula</InputLabel>
                 <Select
                   name="celula"
-                  value={formik.values.celula}
+                  value={formik.values.celula || ""}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  renderValue={(selected: any): React.ReactNode => {
-                    const selectedItem = data?.find(
-                      (item: any) => item.id === selected
+                  renderValue={(selected) => {
+                    const selectedMember = data?.Membros.find(
+                      (membro: any) => membro.idMembro === selected
                     );
-                    return selectedItem ? selectedItem : "Selecione uma Celula";
+                    return selectedMember
+                      ? selectedMember.nome
+                      : "Selecione um membro";
                   }}
                 >
                   {data
-                    ? data.map((item: any) => (
-                        <MenuItem key={item.id} value={item.id}>
+                    ? data.Membros.map((item: any) => (
+                        <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
                       ))
@@ -217,19 +250,25 @@ function Reuniao() {
                 <InputLabel> Membros</InputLabel>
                 <Select
                   name="membros"
-                  value={formik.values.membros}
+                  value={formik.values.membros || ""}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  renderValue={(selected: any): React.ReactNode => {
-                    const selectedItem = data?.find(
-                      (item: any) => item.id === selected
-                    );
-                    return selectedItem ? selectedItem : "Selecione uma Celula";
+                  multiple
+                  renderValue={(selected) => {
+                    return selected
+                      .map((id) => {
+                        const selectedMember = data?.Membros.find(
+                          (membro: any) => membro.idMembro === id
+                        );
+                        return selectedMember ? selectedMember.nome : null;
+                      })
+                      .filter((nome) => nome !== null)
+                      .join(", ");
                   }}
                 >
                   {data
-                    ? data.map((item: any) => (
-                        <MenuItem key={item.id} value={item.id}>
+                    ? data.Membros.map((item: any) => (
+                        <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
                       ))
@@ -242,6 +281,12 @@ function Reuniao() {
                   <FormHelperText>{formik.errors.membros}</FormHelperText>
                 )}
               </FormControl>
+            </div>
+            <div className="listCd">
+              <Button type="submit" variant="contained">
+                Cadastrar
+              </Button>
+              {error && <p>{error.message}</p>}
             </div>
           </form>
         </div>
