@@ -20,6 +20,15 @@ export interface IMembros {
   celula: string;
 }
 
+export interface IReuniao {
+  date: string;
+  responvel_Louvor: number;
+  responvel_palavra: number;
+  responvel_quebragelo: number;
+  idCelula: number;
+  membros: number[];
+}
+
 export const LoginCount = async (dados: ILogin): Promise<any> => {
   console.log(dados, "aqui");
 
@@ -57,6 +66,10 @@ export const listarReunioes = async (): Promise<any> => {
 
 export const listarReunioesId = async (id: number): Promise<any> => {
   const response = await axiosInstance.get(`/reuniao/${id}`);
+  return response;
+};
+export const criarReuniao = async (data: IReuniao): Promise<any> => {
+  const response = await axiosInstance.post("/reuniao", data);
   return response;
 };
 export const listarCelula = async (): Promise<any> => {
