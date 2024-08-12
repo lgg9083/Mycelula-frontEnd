@@ -11,6 +11,7 @@ export interface ILogin {
   >;
   isPending: boolean;
   isError: boolean;
+  error: any;
   isSuccess: boolean;
   token?: string | null;
   celulaName? : number | null;
@@ -28,6 +29,7 @@ export const LoginContext = createContext<ILogin>({
   setSenha: ()=>{},
   setEmail: () => {}, // Inicialize a função com uma implementação básica
   isPending: false,
+  error:null,
   isError: false,
   isSuccess: false,
 });
