@@ -12,10 +12,16 @@ import "./reuniao.css";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { buscarCelularId } from "../../services/routes";
+import {
+  buscarCelularId,
+  criarMembro,
+  criarReuniao,
+  IReuniao,
+} from "../../services/routes";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import validationSchema from "./ValidationSchema";
+import { useMutation } from "@tanstack/react-query";
 function Reuniao() {
   const { token, celulaName } = useAuth();
   const { data, isError, isLoading, isSuccess, error } = useQuery({
@@ -25,7 +31,20 @@ function Reuniao() {
       return response;
     },
   });
-
+  const {
+    mutateAsync: criarreuniao,
+    isSuccess: sucess,
+    isError: erroReuniao,
+  } = useMutation({
+    mutationFn: async (data: IReuniao) => {
+      await criarReuniao(data);
+    },
+    onSuccess: () => {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    },
+  });
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
@@ -36,16 +55,16 @@ function Reuniao() {
   const formik = useFormik({
     initialValues: {
       date: "",
-      idCelula: "",
-      responvel_Louvor: "",
-      responvel_palavra: "",
-      responvel_quebragelo: "",
+      idCelula: 0,
+      responvel_Louvor: 0,
+      responvel_palavra: 0,
+      responvel_quebragelo: 0,
       membros: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("chegabdo");
       console.log(values);
+      criarreuniao(values);
     },
   });
   return (
@@ -207,7 +226,9 @@ function Reuniao() {
                 variant="filled"
                 margin="normal"
                 className="custom-textfield"
-                error={formik.touched.idCelula && Boolean(formik.errors.idCelula)}
+                error={
+                  formik.touched.idCelula && Boolean(formik.errors.idCelula)
+                }
                 sx={{ width: "330px" }}
               >
                 <InputLabel>Celula</InputLabel>
