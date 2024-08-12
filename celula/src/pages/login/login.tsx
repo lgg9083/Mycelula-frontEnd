@@ -5,35 +5,35 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import validationSchema from "./validationSchema";
-import { LoginCount } from "../../services/routes";
-import { useMutation } from "@tanstack/react-query";
 import { useLogin } from "../../hooks/useLogin";
 import { Link, useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
-import { error } from "console";
 import { useAuth } from "../../hooks/useAuth";
+
 function Login() {
   const navigate = useNavigate();
-  const formik = useFormik({
-    initialValues: { email: "", senha: "" },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      sendAccessToken(values);
-    },
-  });
 
   const {
     sendAccessToken,
     setEmail,
     email,
     setSenha,
-
     isError,
     isPending,
     isSuccess,
+    error,
   } = useLogin();
 
+  const formik = useFormik({
+    initialValues: { email: "", senha: "" },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      // Enviar os dados de login
+      sendAccessToken(values);
+    },
+  });
+
   const { token } = useAuth();
+
   useEffect(() => {
     if (!token) {
       navigate("/");
@@ -41,6 +41,18 @@ function Login() {
       navigate("/dashboard");
     }
   }, [token]);
+
+  useEffect(() => {
+    if (isError && error) {
+      // Suponha que 'error' contenha informações sobre o campo que falhou
+      // Exemplo: { field: "senha", message: "Senha incorreta" }
+      if (error.field && error.message) {
+        formik.setFieldError(error.field, error.message);
+      } else {
+        formik.setFieldError("email", "Email ou senha incorreto"); // Mensagem genérica
+      }
+    }
+  }, [isError, error]);
 
   return (
     <>
@@ -79,7 +91,7 @@ function Login() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.senha && Boolean(formik.errors.senha)}
-              helperText={formik.touched.senha ? formik.errors.senha || "" : ""}
+              helperText={formik.touched.senha && formik.errors.senha}
             />
             <Button
               type="submit"
@@ -96,10 +108,9 @@ function Login() {
               Login
             </Button>
             <p className="semConta">
-              Não tem uma conta ?{" "}
+              Não tem uma conta?{" "}
               <span>
                 <Link to={"/cadastrar"} className="link">
-                  {" "}
                   clique aqui!
                 </Link>
               </span>
