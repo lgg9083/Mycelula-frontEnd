@@ -43,6 +43,7 @@ function Dashboard() {
       <div className="containerdash">
         <div className="barra">
           <div className="img">
+            <h1>Visualizar dados</h1>
             <div className="reunioes">
               <img src={celula} alt="celula" />
               <Button
@@ -94,6 +95,22 @@ function Dashboard() {
               >
                 {" "}
                 Reuniões
+              </Button>
+            </div>
+            <h1>Cadastrar</h1>
+            <div className="cad">
+              <Button onClick={() => navigate("/reuniao")}>
+                Cadastrar Reunião
+              </Button>
+            </div>
+            <div className="cad">
+              <Button onClick={() => navigate("/cadastrar-reuniao")}>
+                Cadastrar Celula
+              </Button>
+            </div>
+            <div className="cad">
+              <Button onClick={() => navigate("/cadastrar-reuniao")}>
+                Cadastrar Membro
               </Button>
             </div>
           </div>
