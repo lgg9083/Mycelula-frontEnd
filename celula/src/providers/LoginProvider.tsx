@@ -21,6 +21,7 @@ export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
     data: responseData,
     isSuccess,
     isError,
+    error
   } = useMutation<AxiosResponse<{ token: string }>, AxiosError, ILogin>({
     mutationFn: async (data: ILogin) => {
       const response = await LoginCount(data);
@@ -44,6 +45,7 @@ export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
         senha,
         setSenha,
         token,
+        error,
         celulaName,
         isPending,
         isSuccess,
