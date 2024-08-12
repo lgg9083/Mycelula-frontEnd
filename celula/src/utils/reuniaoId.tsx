@@ -30,7 +30,6 @@ function ReuniaoIds({ id }: { id: number }): JSX.Element {
     queryKey: ["reuniaoId"],
     queryFn: async (): Promise<reuniaoId> => {
       const response = await listarReunioesId(id);
-      console.log(response.data);
       return response.data;
     },
   });
