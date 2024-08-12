@@ -26,6 +26,9 @@
     height: 50px;
 
 }
+.lisair {
+    cursor: pointer;
+}
 .navBar ul {
     display: flex;
     justify-content: space-between;
