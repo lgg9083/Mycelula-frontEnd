@@ -14,7 +14,7 @@ function NavBar() {
       </div>
       <ul>
         <li className={style.lisair} onClick={() => navigate("/")}>
-          home
+          Home
         </li>
         <li className={style.lisair} onClick={() => logout()}>
           Sair
