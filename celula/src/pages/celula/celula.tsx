@@ -10,7 +10,11 @@ import {
 import NavBar from "../../components/NavBar";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { buscarCelularId } from "../../services/routes";
+import {
+  buscarCelularId,
+  criarCelula,
+  ICreateCelula,
+} from "../../services/routes";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
@@ -26,17 +30,34 @@ function Reuniao() {
       return response;
     },
   });
+  const {
+    mutate: enviarDados,
+    isError: isErrorEnvio,
+    isSuccess: isSuccessEnvio,
+  } = useMutation({
+    mutationFn: async (dados: ICreateCelula) => {
+      await criarCelula(dados);
+    },
+    onSuccess: () => {
+      formik.resetForm();
+      alert("Reuniao cadastrada com sucesso!");
+    },
+    onError: (error) => {
+      console.error("Error:", error);
+      alert("Não foi possivel cadastrar a reuniao.");
+    },
+  });
   const formik = useFormik({
     initialValues: {
       nome: "",
       nome_Lider: "",
       Bairro: "",
-      Endereco_Da_Celula: "",
+      endereco_Da_Celula: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        console.log(values);
+        enviarDados(values);
         alert("Reuniao cadastrada com sucesso!");
       } catch (error) {
         console.error("Error:", error);
@@ -66,7 +87,7 @@ function Reuniao() {
             <div className="listCd">
               <TextField
                 label="Nome"
-                name="name"
+                name="nome"
                 type="text"
                 variant="outlined"
                 margin="normal"
@@ -138,23 +159,23 @@ function Reuniao() {
               />
               <TextField
                 label="Endereço da celula"
-                name="Endereco_Da_Celula"
+                name="endereco_Da_Celula"
                 type="text"
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{ shrink: true }}
                 className="custom-textfield"
                 sx={{ width: "330px" }}
-                value={formik.values.Endereco_Da_Celula || ""}
+                value={formik.values.endereco_Da_Celula || ""}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
-                  formik.touched.Endereco_Da_Celula &&
-                  Boolean(formik.errors.Endereco_Da_Celula)
+                  formik.touched.endereco_Da_Celula &&
+                  Boolean(formik.errors.endereco_Da_Celula)
                 }
                 helperText={
-                  formik.touched.Endereco_Da_Celula &&
-                  formik.errors.Endereco_Da_Celula
+                  formik.touched.endereco_Da_Celula &&
+                  formik.errors.endereco_Da_Celula
                 }
               />
             </div>
