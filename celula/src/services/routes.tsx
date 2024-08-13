@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { axiosInstance } from ".";
 
 export interface ILogin {
@@ -19,7 +20,12 @@ export interface IMembros {
   senha: string;
   celula: string;
 }
-
+export interface ICreateCelula {
+  nome: string;
+  Bairro: string;
+  endereco_Da_Celula: string;
+  nome_Lider: string;
+}
 export interface IReuniao {
   date: string;
   responvel_Louvor: number;
@@ -36,13 +42,18 @@ export const LoginCount = async (dados: ILogin): Promise<any> => {
   console.log(response);
   return response;
 };
+
+export const criarCelula = async (dados: ICreateCelula): Promise<AxiosResponse> => {
+  const response = await axiosInstance.post("/celula", dados);
+  console.log(response);
+  return response;
+};
 export const BuscarCelulas = async (): Promise<any> => {
   const response = await axiosInstance.get("/celula");
   return response;
 };
 
 export const buscarCelularId = async (id: number | null): Promise<any> => {
-  console.log(id, "id");
   const response = await axiosInstance.get(`/celula/${id}`);
   return response.data;
 };
