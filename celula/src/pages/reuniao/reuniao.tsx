@@ -73,6 +73,13 @@ function Reuniao() {
       <div className="container">
         <div className="cadastrarReuniao">
           <form onSubmit={formik.handleSubmit}>
+            <div className="listti">
+              <h1>Cadastro de Reunião</h1>
+              <p>
+                Preencha as informações necessárias para registrar a reunião da
+                célula.
+              </p>
+            </div>
             <div className="listCd">
               <TextField
                 label="Data"
