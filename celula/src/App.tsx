@@ -4,6 +4,7 @@ import React from "react";
 import Cadastrar from "./pages/cadastrar/cadastrar";
 import Dashboard from "./pages/dashboard/dashboard";
 import Reuniao from "./pages/reuniao/reuniao";
+import Celula from "./pages/celula/celula";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/cadastrar" element={<Cadastrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route  path="/reuniao" element={<Reuniao/>}/>
+        <Route  path="/celula" element={<Celula/>}/>
       </Routes>
     </Router>
   );
