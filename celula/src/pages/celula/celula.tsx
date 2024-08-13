@@ -89,6 +89,7 @@ function Reuniao() {
                 label="Nome"
                 name="nome"
                 type="text"
+                placeholder="Digite o nome da celula"
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{ shrink: true }}
@@ -113,6 +114,7 @@ function Reuniao() {
                 <Select
                   name="nome_Lider"
                   value={formik.values.nome_Lider}
+                  placeholder="Escolha um membro como Lider"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
@@ -146,6 +148,7 @@ function Reuniao() {
                 label="Bairro"
                 name="Bairro"
                 type="text"
+                placeholder="qual o bairro da celula ?"
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{ shrink: true }}
@@ -161,6 +164,7 @@ function Reuniao() {
                 label="Endereço da celula"
                 name="endereco_Da_Celula"
                 type="text"
+                placeholder="qual o endereço da celula"
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{ shrink: true }}
