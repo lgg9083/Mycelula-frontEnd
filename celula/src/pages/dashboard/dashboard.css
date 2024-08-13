@@ -120,22 +120,38 @@ body {
   text-transform: none;
   color: white;
   font-size: 25px;
-  background-color: #757575;
+  background-color: #000000;
   width: 95%;
-  margin: 0 auto;
+  margin: 10px auto;
+  
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 .cad {
-  background-color: red;
+  background-color: #757575;
   width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px 0;
+}
+.cad:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+.reunioes:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+.membros:hover {
+  background-color: red;
+  color: white;
+}
+.membros.selected {
+  background-color: black;
+  color: white;
 }
 .title {
   background-color: antiquewhite;

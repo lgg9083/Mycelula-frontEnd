@@ -37,6 +37,9 @@ function Dashboard() {
       navigate("/");
     }
   }, [token]);
+  function toggleSelection(element: HTMLElement): void {
+    element.classList.toggle("selected");
+  }
   return (
     <>
       <NavBar />
@@ -44,7 +47,13 @@ function Dashboard() {
         <div className="barra">
           <div className="img">
             <h1>Visualizar dados</h1>
-            <div className="reunioes">
+            <div
+              className="reunioes"
+              style={{
+                backgroundColor: celulas ? "black" : "#757575",
+                ...(celulas && { color: "white" }), // Opcional: ajusta a cor do texto se selecionado
+              }}
+            >
               <img src={celula} alt="celula" />
               <Button
                 onClick={() => {
@@ -61,7 +70,13 @@ function Dashboard() {
                 celula
               </Button>
             </div>
-            <div className="membros">
+            <div
+              className="membros"
+              style={{
+                backgroundColor: membrosss ? "black" : "#757575",
+                ...(membrosss && { color: "white" }), // Opcional: ajusta a cor do texto se selecionado
+              }}
+            >
               <img src={membros} alt="membros" />
               <Button
                 onClick={() => {
@@ -79,7 +94,13 @@ function Dashboard() {
                 Membros
               </Button>
             </div>
-            <div className="reunioes">
+            <div
+              className="reunioes"
+              style={{
+                backgroundColor: reuniao ? "black" : "#757575",
+                ...(reuniao && { color: "white" }), // Opcional: ajusta a cor do texto se selecionado
+              }}
+            >
               <img src={reunioes} alt=" reunioes" />
               <Button
                 onClick={() => {
@@ -104,7 +125,7 @@ function Dashboard() {
               </Button>
             </div>
             <div className="cad">
-              <Button onClick={() => navigate("/cadastrar-reuniao")}>
+              <Button onClick={() => navigate("/celula")}>
                 Cadastrar Celula
               </Button>
             </div>
