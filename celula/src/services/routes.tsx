@@ -43,7 +43,9 @@ export const LoginCount = async (dados: ILogin): Promise<any> => {
   return response;
 };
 
-export const criarCelula = async (dados: ICreateCelula): Promise<AxiosResponse> => {
+export const criarCelula = async (
+  dados: ICreateCelula
+): Promise<AxiosResponse> => {
   const response = await axiosInstance.post("/celula", dados);
   console.log(response);
   return response;
@@ -85,5 +87,13 @@ export const criarReuniao = async (data: IReuniao): Promise<any> => {
 };
 export const listarCelula = async (): Promise<any> => {
   const response = await axiosInstance.get("/celula");
+  return response;
+};
+
+export const atualizarCelula = async (
+  id: number,
+  data: ICreateCelula
+): Promise<any> => {
+  const response = await axiosInstance.put(`/celula/${id}`, data);
   return response;
 };
