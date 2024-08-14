@@ -5,6 +5,7 @@ import Cadastrar from "./pages/cadastrar/cadastrar";
 import Dashboard from "./pages/dashboard/dashboard";
 import Reuniao from "./pages/reuniao/reuniao";
 import Celula from "./pages/celula/celula";
+import EditCelula from "./utils/editCelula";
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/cadastrar" element={<Cadastrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route  path="/reuniao" element={<Reuniao/>}/>
-        <Route  path="/celula" element={<Celula/>}/>
+        <Route path="/reuniao" element={<Reuniao />} />
+        <Route path="/celula" element={<Celula />} />
+        <Route path="/celulas/:id" element={<EditCelula />} />
       </Routes>
     </Router>
   );
