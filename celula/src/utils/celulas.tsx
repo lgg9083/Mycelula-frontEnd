@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { listarCelula } from "../services/routes";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import CelulaDetails from "./celulaDetails";
 interface ICelula {
   nome: string;
   endereco_Da_Celula: string;
@@ -12,6 +13,7 @@ interface ICelula {
 }
 
 function Celulas() {
+  const [id, setId] = useState(0);
   const [celula, setCelula] = useState(true);
   const [celulaDetails, setCelulaDetails] = useState(false);
   const navigate = useNavigate();
@@ -33,12 +35,18 @@ function Celulas() {
             <p>Líder: {celula.nome_Lider}</p>
             <p>Bairro: {celula.Bairro}</p>
             <div className="buttons">
-              <Button onClick={() => {
-                setCelula(false);
-                setCelulaDetails(true);
-              }}>Ver detalhes</Button>
               <Button
                 onClick={() => {
+                  setId(celula.id);
+                  setCelula(false);
+                  setCelulaDetails(true);
+                }}
+              >
+                Ver detalhes
+              </Button>
+              <Button
+                onClick={() => {
+                  
                   navigate(`/celulas/${celula.id}`);
                 }}
               >
@@ -48,7 +56,7 @@ function Celulas() {
           </div>
         ))
       ) : celulaDetails ? (
-        <div>details</div>
+        <CelulaDetails id={id} />
       ) : null}
     </div>
   );
