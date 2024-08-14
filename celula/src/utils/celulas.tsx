@@ -26,38 +26,39 @@ function Celulas() {
   });
   console.log(data);
   return (
-    <div className="containercard">
-      {celula ? (
-        data?.map((celula: ICelula) => (
-          <div key={celula.id} className="card">
-            <h3>{celula.nome}</h3>
-            <p>Endereço: {celula.endereco_Da_Celula}</p>
-            <p>Líder: {celula.nome_Lider}</p>
-            <p>Bairro: {celula.Bairro}</p>
-            <div className="buttons">
-              <Button
-                onClick={() => {
-                  setId(celula.id);
-                  setCelula(false);
-                  setCelulaDetails(true);
-                }}
-              >
-                Ver detalhes
-              </Button>
-              <Button
-                onClick={() => {
-                  
-                  navigate(`/celulas/${celula.id}`);
-                }}
-              >
-                Editar
-              </Button>
+    <div className="containerDash">
+      <div className="containercard">
+        {celula ? (
+          data?.map((celula: ICelula) => (
+            <div key={celula.id} className="card">
+              <h3>{celula.nome}</h3>
+              <p>Endereço: {celula.endereco_Da_Celula}</p>
+              <p>Líder: {celula.nome_Lider}</p>
+              <p>Bairro: {celula.Bairro}</p>
+              <div className="buttons">
+                <Button
+                  onClick={() => {
+                    setId(celula.id);
+                    setCelula(false);
+                    setCelulaDetails(true);
+                  }}
+                >
+                  Ver detalhes
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate(`/celulas/${celula.id}`);
+                  }}
+                >
+                  Editar
+                </Button>
+              </div>
             </div>
-          </div>
-        ))
-      ) : celulaDetails ? (
-        <CelulaDetails id={id} />
-      ) : null}
+          ))
+        ) : celulaDetails ? (
+          <CelulaDetails id={id} />
+        ) : null}
+      </div>
     </div>
   );
 }
