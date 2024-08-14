@@ -26,7 +26,7 @@ function Celulas() {
   return (
     <div className="containercard">
       {celula ? (
-        data.map((celula: ICelula) => (
+        data?.map((celula: ICelula) => (
           <div key={celula.id} className="card">
             <h3>{celula.nome}</h3>
             <p>Endereço: {celula.endereco_Da_Celula}</p>
