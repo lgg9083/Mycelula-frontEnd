@@ -161,7 +161,13 @@ function Dashboard() {
                     >
                       Ver detalhes
                     </Button>
-                    <Button>Editar</Button>
+                    <Button
+                      onClick={() => {
+                        navigate(`/celulas/${reuniao.celula.id}`);
+                      }}
+                    >
+                      Editar
+                    </Button>
                   </div>
                 </div>
               ))}
