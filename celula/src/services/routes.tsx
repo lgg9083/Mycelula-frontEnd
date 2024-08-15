@@ -18,12 +18,12 @@ export interface IMembros {
   cidade: string;
   email: string;
   senha: string;
-  celula: string;
+  // celula: string;
 }
 export interface ICreateCelula {
   nome: string;
   Bairro: string;
-  endereco_Da_Celula: string;
+  Endereco_Da_Celula: string;
   nome_Lider: string;
 }
 export interface IReuniao {
