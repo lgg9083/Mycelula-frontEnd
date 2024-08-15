@@ -149,11 +149,11 @@ function Dashboard() {
                     <Button
                       onClick={() => {
                         if (reuniaoId === false) {
+                          setid(reuniao.id);
                           setreuniao(false);
                           setcelulas(false);
                           setMembrosss(false);
                           setReuniaoId(true);
-                          setid(reuniao.id);
                           return;
                         }
                         setReuniaoId(false);
