@@ -14,10 +14,13 @@ import {
   atualizarCelula,
   buscarCelularId,
   ICreateCelula,
+  listarMembro,
 } from "../services/routes";
 import validationSchema from "../pages/celula/validationSchema";
 import { useAuth } from "../hooks/useAuth";
 import { useParams } from "react-router-dom";
+import { string } from "yup";
+
 interface Cel {
   id: number;
 }
@@ -29,10 +32,17 @@ const EditCelula: React.FC = () => {
     queryKey: ["membrocelula"],
     queryFn: async () => {
       const response = await buscarCelularId(Number(id) ?? null);
+      console.log(response, "response da celula id");
       return response;
     },
   });
-  console.log(data?.nome_Lider);
+  const { data: dataMembros } = useQuery({
+    queryKey: ["membros"],
+    queryFn: async () => {
+      const response = await listarMembro();
+      return response.data;
+    },
+  });
   const { mutate: atualizarCelulaId, error } = useMutation<
     void,
     Error,
@@ -47,9 +57,10 @@ const EditCelula: React.FC = () => {
   const formik = useFormik({
     initialValues: {
       nome: data?.nome || "",
-      nome_Lider: data?.nome_Lider || "",
+      nome_Lider: data?.nome_Lider.nome || "",
       Bairro: data?.Bairro || "",
-      endereco_Da_Celula: data?.endereco_Da_Celula || "",
+      Endereco_Da_Celula: data?.endereco_Da_Celula || "",
+      Membros: data?.Membros || [],
     },
     enableReinitialize: true, // Permite reinitializar os valores quando "data" é carregado
     validationSchema: validationSchema,
@@ -105,19 +116,20 @@ const EditCelula: React.FC = () => {
                 <InputLabel>Selecione um membro como Líder</InputLabel>
                 <Select
                   name="nome_Lider"
-                  value={formik.values.nome_Lider}
+                  value={formik.values.nome_Lider} // Verifique se o valor está correto
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
-                    const selectedMember = data?.Membros.find(
+                    // Verifica se o valor selecionado é o ID de um membro e retorna o nome correspondente
+                    const selectedMember = dataMembros.find(
                       (membro: any) => membro.idMembro === selected
                     );
-                    return selectedMember
-                      ? selectedMember.nome
-                      : "Selecione um membro";
+
+                    // Caso o membro seja encontrado, retorna o nome, caso contrário, retorna o valor selecionado
+                    return selectedMember ? selectedMember.nome : selected;
                   }}
                 >
-                  {data?.Membros.map((item: any) => (
+                  {dataMembros?.map((item: any) => (
                     <MenuItem key={item.idMembro} value={item.idMembro}>
                       {item.nome}
                     </MenuItem>
@@ -126,6 +138,7 @@ const EditCelula: React.FC = () => {
                     <em>Selecione um membro</em>
                   </MenuItem>
                 </Select>
+
                 {formik.touched.nome_Lider && formik.errors.nome_Lider && (
                   <FormHelperText>
                     {typeof formik.errors.nome_Lider === "string"
@@ -158,7 +171,7 @@ const EditCelula: React.FC = () => {
               />
               <TextField
                 label="Endereço da célula"
-                name="endereco_Da_Celula"
+                name="Endereco_Da_Celula"
                 type="text"
                 placeholder="Qual o endereço da célula?"
                 variant="outlined"
@@ -166,19 +179,68 @@ const EditCelula: React.FC = () => {
                 InputLabelProps={{ shrink: true }}
                 className="custom-textfield"
                 sx={{ width: "330px" }}
-                value={formik.values.endereco_Da_Celula}
+                value={formik.values.Endereco_Da_Celula}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
-                  formik.touched.endereco_Da_Celula &&
-                  Boolean(formik.errors.endereco_Da_Celula)
+                  formik.touched.Endereco_Da_Celula &&
+                  Boolean(formik.errors.Endereco_Da_Celula)
                 }
                 helperText={
-                  typeof formik.errors.endereco_Da_Celula === "string"
-                    ? formik.errors.endereco_Da_Celula
+                  typeof formik.errors.Endereco_Da_Celula === "string"
+                    ? formik.errors.Endereco_Da_Celula
                     : undefined
                 }
               />
+            </div>
+            <div className="listCd">
+              <FormControl
+                variant="filled"
+                margin="normal"
+                className="custom-textfield"
+                error={formik.touched.Membros && Boolean(formik.errors.Membros)}
+                sx={{ width: "330px" }}
+              >
+                <InputLabel>Membros</InputLabel>
+                <Select
+                  name="Membros"
+                  value={formik.values.Membros}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  multiple
+                  renderValue={(selected) => {
+                    return selected
+                      .map((membroSelected: any) => {
+                        // Usar find para obter o membro completo de `dataMembros`
+                        const selectedMember = dataMembros?.find(
+                          (membro: any) => membro.idMembro === membroSelected.idMembro
+                        );
+                  
+                        // Retornar o nome do membro, ou null se não for encontrado
+                        return selectedMember ? selectedMember.nome : null;
+                      })
+                      .filter((nome: any) => nome !== null) // Filtra valores nulos
+                      .join(", "); // Junta todos os nomes com uma vírgula
+                  }}
+                  
+                >
+                  {dataMembros?.map((item: any) => (
+                    <MenuItem key={item.idMembro} value={item}>
+                      {item.nome}
+                    </MenuItem>
+                  ))}
+                  <MenuItem value="">
+                    <em>Selecione os participantes</em>
+                  </MenuItem>
+                </Select>
+                {formik.touched.Membros && formik.errors.Membros && (
+                  <FormHelperText>
+                    {typeof formik.errors.Membros === "string"
+                      ? formik.errors.Membros
+                      : null}
+                  </FormHelperText>
+                )}
+              </FormControl>
             </div>
             <div className="listCd">
               <Button type="submit" variant="contained">
