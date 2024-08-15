@@ -57,10 +57,11 @@ function Cadastrar() {
       cidade: "",
       email: "",
       senha: "",
-      celula: "",
+      // celula: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      console.log(values)
       criarMembros(values);
     },
   });
@@ -175,7 +176,7 @@ function Cadastrar() {
                 error={formik.touched.cidade && Boolean(formik.errors.cidade)}
                 helperText={formik.touched.cidade ? formik.errors.cidade || "" : ""}
               />
-              <FormControl
+              {/* <FormControl
                 variant="filled"
                 margin="normal"
                 className="custom-textfield"
@@ -207,7 +208,7 @@ function Cadastrar() {
                 {formik.touched.celula && formik.errors.celula && (
                   <FormHelperText>{formik.errors.celula}</FormHelperText>
                 )}
-              </FormControl>
+              </FormControl> */}
             </div>
             <div className="listCd">
               <TextField
