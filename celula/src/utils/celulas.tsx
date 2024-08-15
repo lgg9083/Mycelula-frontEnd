@@ -7,11 +7,13 @@ import CelulaDetails from "./celulaDetails";
 interface ICelula {
   nome: string;
   endereco_Da_Celula: string;
-  nome_Lider: string;
+  nome_Lider: nomeLider;
   Bairro: string;
   id: number;
 }
-
+interface nomeLider {
+  nome:string
+}
 function Celulas() {
   const [id, setId] = useState(0);
   const [celula, setCelula] = useState(true);
@@ -33,7 +35,7 @@ function Celulas() {
             <div key={celula.id} className="card">
               <h3>{celula.nome}</h3>
               <p>Endereço: {celula.endereco_Da_Celula}</p>
-              <p>Líder: {celula.nome_Lider}</p>
+              <p>Líder: {celula.nome_Lider?.nome}</p>
               <p>Bairro: {celula.Bairro}</p>
               <div className="buttons">
                 <Button
