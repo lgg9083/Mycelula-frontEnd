@@ -119,7 +119,7 @@ function Reuniao() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
-                    const selectedMember = data?.data.find(
+                    const selectedMember = data?.data?.find(
                       (membro: any) => membro.idMembro === selected
                     );
                     return selectedMember
@@ -128,7 +128,7 @@ function Reuniao() {
                   }}
                 >
                   {data
-                    ? data?.data.map((item: any) => (
+                    ? data?.data?.map((item: any) => (
                         <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
