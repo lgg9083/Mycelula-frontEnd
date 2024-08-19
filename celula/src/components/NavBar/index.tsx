@@ -16,6 +16,9 @@ function NavBar() {
         <li className={style.lisair} onClick={() => navigate("/")}>
           Home
         </li>
+        <li className={style.lisair} onClick={() => navigate("/profile")}>
+          Meu Perfil
+        </li>
         <li className={style.lisair} onClick={() => logout()}>
           Sair
         </li>
