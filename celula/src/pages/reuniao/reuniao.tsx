@@ -113,7 +113,7 @@ function Reuniao() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
-                    const selectedMember = data?.Membros.find(
+                    const selectedMember = data?.Membros?.find(
                       (membro: any) => membro.idMembro === selected
                     );
                     return selectedMember
@@ -121,7 +121,7 @@ function Reuniao() {
                       : "Selecione um membro";
                   }}
                 >
-                  {data?.Membros.map((item: any) => (
+                  {data?.Membros?.map((item: any) => (
                     <MenuItem key={item.idMembro} value={item.idMembro}>
                       {item.nome}
                     </MenuItem>
@@ -157,7 +157,7 @@ function Reuniao() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   renderValue={(selected) => {
-                    const selectedMember = data?.Membros.find(
+                    const selectedMember = data?.Membros?.find(
                       (membro: any) => membro.idMembro === selected
                     );
                     return selectedMember
@@ -166,7 +166,7 @@ function Reuniao() {
                   }}
                 >
                   {data
-                    ? data.Membros.map((item: any) => (
+                    ? data?.Membros?.map((item: any) => (
                         <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
@@ -210,7 +210,7 @@ function Reuniao() {
                   }}
                 >
                   {data
-                    ? data.Membros.map((item: any) => (
+                    ? data?.Membros?.map((item: any) => (
                         <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
@@ -285,7 +285,7 @@ function Reuniao() {
                   renderValue={(selected) => {
                     return selected
                       .map((id) => {
-                        const selectedMember = data?.Membros.find(
+                        const selectedMember = data?.Membros?.find(
                           (membro: any) => membro.idMembro === id
                         );
                         return selectedMember ? selectedMember.nome : null;
@@ -295,7 +295,7 @@ function Reuniao() {
                   }}
                 >
                   {data
-                    ? data.Membros.map((item: any) => (
+                    ? data?.Membros?.map((item: any) => (
                         <MenuItem key={item.idMembro} value={item.idMembro}>
                           {item.nome}
                         </MenuItem>
