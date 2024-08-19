@@ -130,7 +130,7 @@ function Dashboard() {
               </Button>
             </div>
             <div className="cad">
-              <Button onClick={() => navigate("/cadastrar-reuniao")}>
+              <Button onClick={() => navigate("/reuniao")}>
                 Cadastrar Membro
               </Button>
             </div>
