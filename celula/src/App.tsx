@@ -6,7 +6,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Reuniao from "./pages/reuniao/reuniao";
 import Celula from "./pages/celula/celula";
 import EditCelula from "./utils/editCelula";
-
+import Profile from "./pages/profile/profile";
 function App() {
   return (
     <Router>
@@ -17,6 +17,7 @@ function App() {
         <Route path="/reuniao" element={<Reuniao />} />
         <Route path="/celula" element={<Celula />} />
         <Route path="/celulas/:id" element={<EditCelula />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
