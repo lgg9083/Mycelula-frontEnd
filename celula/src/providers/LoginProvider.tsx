@@ -14,6 +14,7 @@ interface ILoginProviderProps {
 export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
+  const [user, setUser] = useState<number>(0);
   const { updateToken, celulaName, setCelulaName } = useAuth();
   const {
     mutate: sendAccessToken,
@@ -21,15 +22,15 @@ export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
     data: responseData,
     isSuccess,
     isError,
-    error
+    error,
   } = useMutation<AxiosResponse<{ token: string }>, AxiosError, ILogin>({
     mutationFn: async (data: ILogin) => {
       const response = await LoginCount(data);
       updateToken(response.data.token);
       const decodedToken = jwtDecode<MyTokenPayload>(response.data.token);
 
-      console.log(decodedToken);
-
+      console.log("decoded", decodedToken);
+      setUser(decodedToken?.id)
       return response;
     },
   });
@@ -44,6 +45,7 @@ export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
         email,
         senha,
         setSenha,
+        user,
         token,
         error,
         celulaName,

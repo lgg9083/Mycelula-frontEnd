@@ -10,6 +10,7 @@ interface Mycelula {
 export interface MyTokenPayload {
  
   celula: number;
+  id: number
 }
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
