@@ -30,7 +30,7 @@ export const LoginProvider: React.FC<ILoginProviderProps> = ({ children }) => {
       const decodedToken = jwtDecode<MyTokenPayload>(response.data.token);
 
       console.log("decoded", decodedToken);
-      setUser(decodedToken?.id)
+      setUser(Number(decodedToken?.id))
       return response;
     },
   });

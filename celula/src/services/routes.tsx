@@ -59,8 +59,8 @@ export const buscarCelularId = async (id: number | null): Promise<any> => {
   const response = await axiosInstance.get(`/celula/${id}`);
   return response.data;
 };
-export const buscarMembroPorId = async (data: IBusca): Promise<any> => {
-  const response = await axiosInstance.get(`/membros/${data}`);
+export const buscarMembroPorId = async (id: number): Promise<any> => {
+  const response = await axiosInstance.get(`/membros/${id}`);
   return response;
 };
 export const criarMembro = async (dados: IMembros): Promise<any> => {

@@ -1,0 +1,12 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.perfil {
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    padding: 20px;
+    height: 100px;
+    width: 600px;
+}
