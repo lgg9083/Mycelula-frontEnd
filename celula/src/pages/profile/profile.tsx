@@ -18,10 +18,8 @@ const Profile: React.FC = () => {
       if (typeof user !== "number") {
         throw new Error("User ID must be a number");
       }
-      console.log(`Fetching member with ID: ${user}`);
       const result = await buscarMembroPorId(user);
-      console.log(result);
-      return result; // Certifique-se de que a função retorna um valor adequado
+      return result;
     },
   });
   useEffect(() => {
