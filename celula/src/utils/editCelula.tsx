@@ -193,7 +193,7 @@ const EditCelula: React.FC = () => {
                 }
               />
             </div>
-            <div className="listCd">
+            {/* <div className="listCd">
               <FormControl
                 variant="filled"
                 margin="normal"
@@ -241,7 +241,7 @@ const EditCelula: React.FC = () => {
                   </FormHelperText>
                 )}
               </FormControl>
-            </div>
+            </div> */}
             <div className="listCd">
               <Button type="submit" variant="contained">
                 Atualizar
