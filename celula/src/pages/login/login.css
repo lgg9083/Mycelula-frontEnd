@@ -17,7 +17,7 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .login {
-  background-color: #757575;
+  background-color: rgba(241, 233, 233, 0.114);
   width: 500px;
   height: 500px;
   border-radius: 15px;
@@ -57,7 +57,7 @@ body {
 }
 
 .error {
-  color: red;
+  color: rgba(255, 0, 0, 0.525);
   font-size: 15px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
