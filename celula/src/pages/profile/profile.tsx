@@ -39,7 +39,7 @@ const Profile: React.FC = () => {
           <h1>Data de Nascimento : {data?.data.data_de_nascimento}</h1>
           <h1>Telefone : {data?.data.telefone}</h1>
           <h1>Email : {data?.data.email}</h1>
-          <Button>Alterar Dados</Button>
+          <Button >Alterar Dados</Button>
         </div>
       </div>
     </>
