@@ -51,7 +51,7 @@ function Dashboard() {
               className="reunioes"
               style={{
                 backgroundColor: celulas ? "black" : "#757575",
-                ...(celulas && { color: "white" }), // Opcional: ajusta a cor do texto se selecionado
+                ...(celulas && { color: "white" })
               }}
             >
               <img src={celula} alt="celula" />
